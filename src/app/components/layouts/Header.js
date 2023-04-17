@@ -14,7 +14,12 @@ const Header = () => {
     localStorage.setItem("country", country);
     setSearchParams({ country: country });
   };
-  const country = searchParams.get("country") ?? "gb";
+  const countryLocal = localStorage.getItem("country");
+  const country = searchParams.get("country")
+    ? searchParams.get("country")
+    : countryLocal
+    ? countryLocal
+    : "gb";
 
   return (
     <>
