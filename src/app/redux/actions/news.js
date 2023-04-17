@@ -9,7 +9,7 @@ import {
   CLEAR_TOP_NEWS,
 } from "./types";
 
-let newsApiKey = "59254e7189664e95bae182e33026536f";
+let newsApiKey = "40797288395247e6b6772ea3cf1c61f2";
 
 // Set Source loading
 export const setSourceLoading = () => {
