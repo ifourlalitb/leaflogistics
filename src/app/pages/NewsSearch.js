@@ -5,7 +5,7 @@ import NewsList from "../components/NewsList";
 import CategorySourceSearchBox from "../components/CategorySourceSearchBox";
 import { Container } from "react-bootstrap";
 
-const Home = ({ setTopNews, news, clearTopNews }) => {
+const NewsSearch = ({ setTopNews, news, clearTopNews }) => {
   const [page, setPage] = useState(1);
   const [categorySourceUrl, setCategorySourceUrl] = useState("");
 
@@ -31,13 +31,13 @@ const Home = ({ setTopNews, news, clearTopNews }) => {
   return (
     <>
       <Container>
-        <h3>Top news from Great Britain:</h3>
+        <h3>Search top news from Great Britain by term:</h3>
       </Container>
       <CategorySourceSearchBox
         onCategorySourceSearch={(categorySourceUrl) => {
           handleCategorySourceSearch(categorySourceUrl);
         }}
-        flag={true}
+        flag={false}
       />
       <NewsList
         newsItemsTotal={news?.newsItemsTotal ? news.newsItemsTotal : 0}
@@ -54,4 +54,6 @@ const mapStateToProps = (state) => ({
   news: state.news,
 });
 
-export default connect(mapStateToProps, { setTopNews, clearTopNews })(Home);
+export default connect(mapStateToProps, { setTopNews, clearTopNews })(
+  NewsSearch
+);

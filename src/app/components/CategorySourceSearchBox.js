@@ -1,27 +1,13 @@
 import { useEffect, useState } from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Form,
-  Button,
-  ButtonGroup,
-  ButtonToolbar,
-} from "react-bootstrap";
+import { Col, Container, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-const CategorySourceSearchBox = ({ onCategorySourceSearch, news }) => {
-  const [country, setCountry] = useState("us");
+const CategorySourceSearchBox = ({ onCategorySourceSearch, news, flag }) => {
+  const [searchParams] = useSearchParams();
+  const country = searchParams.get("country") ?? "gb";
   const [category] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    setCountry(localStorage.getItem("country"));
-  }, []);
-  const handleClick = (country) => {
-    localStorage.setItem("country", country);
-    setCountry(country);
-  };
 
   useEffect(() => {
     onCategorySourceSearch(
@@ -30,7 +16,7 @@ const CategorySourceSearchBox = ({ onCategorySourceSearch, news }) => {
   });
 
   return (
-    <Container fluid className={`heroContainer-${news.theme}`}>
+    <Container fluid className={flag ? "d-none" : ""}>
       <Row className="justify-content-md-center">
         <Col xs lg="8">
           <Form className="mt-3">
@@ -44,22 +30,6 @@ const CategorySourceSearchBox = ({ onCategorySourceSearch, news }) => {
                 />
               </Col>
             </Form.Group>
-            <ButtonToolbar aria-label="Toolbar with button groups">
-              <ButtonGroup className="me-2" aria-label="First group">
-                <Button
-                  onClick={() => handleClick("gb")}
-                  className={country === "gb" ? "active" : null}
-                >
-                  GB
-                </Button>
-                <Button
-                  onClick={() => handleClick("us")}
-                  className={country === "us" ? "active" : null}
-                >
-                  US
-                </Button>
-              </ButtonGroup>
-            </ButtonToolbar>
           </Form>
         </Col>
       </Row>
